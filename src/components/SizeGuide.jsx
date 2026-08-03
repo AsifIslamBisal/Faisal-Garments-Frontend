@@ -44,12 +44,12 @@ const SizeGuide = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#FDFDFD] text-slate-800 py-12 px-4 md:px-8 mt-14">
+    <div className="min-h-screen bg-[#FFFFFB] text-slate-800 py-12 px-4 md:px-8 mt-14">
       <div className="max-w-6xl mx-auto">
         
 
         <header className="text-center mb-16">
-          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="inline-block px-4 py-1 rounded-full bg-blue-50 text-blue-600 text-sm font-bold tracking-widest mb-4">
+          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="inline-block px-4 py-1 rounded-full bg-[#FFE9DB] text-[#FF6A1A] text-sm font-bold tracking-widest mb-4">
             OFFICIAL GARMENTS GUIDE
           </motion.div>
           <h1 className="text-4xl md:text-5xl font-black text-slate-900 mb-4 tracking-tight">সঠিক মাপ ও সাইজ গাইড</h1>
@@ -62,13 +62,13 @@ const SizeGuide = () => {
           <aside className="lg:col-span-4 space-y-6">
             <div className="bg-white rounded-[2rem] p-8 shadow-xl shadow-slate-100 border border-slate-100">
               <h3 className="text-xl font-bold mb-8 flex items-center gap-2 text-slate-900">
-                <Ruler className="text-blue-600" /> কিভাবে মাপ নিবেন?
+                <Ruler className="text-[#FF6A1A]" /> কিভাবে মাপ নিবেন?
               </h3>
               
               <div className="space-y-8">
                 {measurementTips.map((tip) => (
                   <div key={tip.id} className="relative pl-10">
-                    <span className="absolute left-0 top-0 w-7 h-7 bg-blue-600 text-white rounded-lg flex items-center justify-center font-bold text-xs shadow-lg shadow-blue-200">
+                    <span className="absolute left-0 top-0 w-7 h-7 bg-[#FF6A1A] text-white rounded-lg flex items-center justify-center font-bold text-xs shadow-lg shadow-[#e0580e]">
                       {tip.id}
                     </span>
                     <h4 className="font-bold text-slate-800 mb-1">{tip.title}</h4>
@@ -92,7 +92,7 @@ const SizeGuide = () => {
                   key={tab.id}
                   onClick={() => setActiveTab(tab.id)}
                   className={`flex items-center gap-2 px-6 py-3 rounded-xl text-sm font-bold transition-all ${
-                    activeTab === tab.id ? 'bg-white text-blue-600 shadow-md' : 'text-slate-500 hover:text-slate-700'
+                    activeTab === tab.id ? 'bg-white text-[#FF6A1A] shadow-md' : 'text-slate-500 hover:text-slate-700'
                   }`}
                 >
                   {tab.icon} {tab.label}
@@ -130,7 +130,7 @@ const SizeGuide = () => {
                     </thead>
                     <tbody className="divide-y divide-slate-50">
                       {sizeData[activeTab].map((row, i) => (
-                        <tr key={i} className="hover:bg-blue-50/30 transition-colors group font-medium">
+                        <tr key={i} className="hover:bg-[#FFE9DB]/30 transition-colors group font-medium">
                           <td className="px-6 py-5">
                             <span className="block text-slate-900 font-bold">{row.size || row.label}</span>
                           </td>
@@ -140,7 +140,7 @@ const SizeGuide = () => {
                           {activeTab !== 'winter' && (
                             <>
                               <td className="px-6 py-5 text-center text-slate-600 ">{row.waist}</td>
-                              <td className="px-6 py-5 text-center text-blue-600 font-bold">{row.pLength}</td>
+                              <td className="px-6 py-5 text-center text-[#FF6A1A] font-bold">{row.pLength}</td>
                             </>
                           )}
                         </tr>

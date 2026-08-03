@@ -9,14 +9,14 @@ const OrderProcess = () => {
       title: "পণ্য নির্বাচন করুন",
       desc: "আমাদের ওয়েবসাইট থেকে আপনার পছন্দের ইউনিফর্ম, সাইজ এবং কালার সিলেক্ট করুন।",
       icon: <ShoppingBag size={30} />,
-      color: "from-blue-500 to-blue-600"
+      color: "from-[#FF6A1A] to-[#e0580e]"
     },
     {
       id: 2,
       title: "অর্ডার কনফার্ম করুন",
       desc: "কার্টে পণ্য যোগ করে আপনার সঠিক ঠিকানা এবং ফোন নম্বর দিয়ে অর্ডার সম্পন্ন করুন।",
       icon: <MousePointer2 size={30} />,
-      color: "from-indigo-500 to-indigo-600"
+      color: "from-[#e0580e] to-[#FF6A1A]"
     },
     {
       id: 3,
@@ -49,7 +49,7 @@ const OrderProcess = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-slate-50 py-24 px-6 lg:px-24 font-sans mt-10">
+    <div className="min-h-screen bg-[#FFFFFB] py-24 px-6 lg:px-24 font-sans mt-10">
       <div className="max-w-7xl mx-auto">
         
 
@@ -57,14 +57,14 @@ const OrderProcess = () => {
           <motion.span 
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
-            className="text-blue-600 font-black uppercase tracking-[0.4em] text-[10px]"
+            className="text-[#FF6A1A] font-black uppercase tracking-[0.4em] text-[10px]"
           >
             Digital Shopping Experience
           </motion.span>
           <h2 className="text-4xl md:text-6xl font-black text-slate-900 mt-4 tracking-tighter">
-            অনলাইনে অর্ডার করার <span className="text-blue-600">নিয়মাবলী</span>
+            অনলাইনে অর্ডার করার <span className="text-[#FF6A1A]">নিয়মাবলী</span>
           </h2>
-          <div className="mt-6 w-24 h-2 bg-blue-600 mx-auto rounded-full"></div>
+          <div className="mt-6 w-24 h-2 bg-[#FF6A1A] mx-auto rounded-full"></div>
         </div>
 
 
@@ -86,7 +86,7 @@ const OrderProcess = () => {
                 </div>
 
 
-                <span className="absolute top-8 right-10 text-slate-100 font-black text-6xl -z-10 group-hover:text-blue-200 transition-colors">
+                <span className="absolute top-8 right-10 text-slate-100 font-black text-6xl -z-10 group-hover:text-[#e0580e] transition-colors">
                   0{step.id}
                 </span>
 
@@ -108,13 +108,13 @@ const OrderProcess = () => {
         <motion.div 
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
-          className="mt-20 p-10 bg-blue-600 rounded-[3rem] flex flex-col md:flex-row items-center justify-between gap-8 shadow-2xl shadow-blue-200"
+          className="mt-20 p-10 bg-[#FF6A1A] rounded-[3rem] flex flex-col md:flex-row items-center justify-between gap-8 shadow-2xl shadow-[#e0580e]"
         >
           <div className="text-white">
             <h4 className="text-2xl font-black mb-2 ">অর্ডার করতে কোনো সমস্যা হচ্ছে?</h4>
-            <p className="text-blue-100 font-medium">আমাদের হটলাইনে কল করুন, আমরা আপনাকে অর্ডার করতে সাহায্য করব।</p>
+            <p className="text-[#FFE9DB] font-medium">আমাদের হটলাইনে কল করুন, আমরা আপনাকে অর্ডার করতে সাহায্য করব।</p>
           </div>
-          <button className="bg-white text-blue-600 px-10 py-4 rounded-2xl font-black text-sm uppercase tracking-widest hover:scale-105 transition-transform">
+          <button className="bg-white text-[#e0580e] px-10 py-4 rounded-2xl font-black text-sm uppercase tracking-widest hover:scale-105 transition-transform">
             কল করুন: +880  1676952977,+880 1820809695
           </button>
         </motion.div>
