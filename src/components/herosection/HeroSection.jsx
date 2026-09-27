@@ -1,16 +1,20 @@
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
+import { useTranslation } from "react-i18next";
 import heroVideo from "../../assets/herovideo/herovideo.mp4";
 
 const HeroSection = () => {
+  const { t } = useTranslation();
+
   const headings = [
-    "শীর্ষ মানের ইনস্টিটিউট ড্রেস তৈরি",
+    t("hero.title"),
     "আপনার স্বপ্নের ইউনিফর্ম বাস্তবায়ন",
     "আরামদায়ক এবং স্টাইলিশ পোশাক",
   ];
 
   const subTexts = [
-    "আমরা নিশ্চিত করি যে প্রতিটি ড্রেস মান, আরাম এবং স্টাইলের দিক থেকে শ্রেষ্ঠ।",
+    t("hero.subtitle"),
     "ইনস্টিটিউটের জন্য কাস্টমাইজড ইউনিফর্ম যা প্রতিটি ছাত্রের জন্য নিখুঁত।",
     "আপনার প্রতিষ্ঠানকে বিশেষ ও প্রফেশনাল লুক দেওয়ার জন্য আমাদের দক্ষ টিম প্রস্তুত।",
   ];
@@ -21,7 +25,7 @@ const HeroSection = () => {
   useEffect(() => {
     const mainTitleTimeout = setTimeout(() => {
       setShowMainTitle(false);
-    }, 4000);
+    }, 5000);
 
     return () => clearTimeout(mainTitleTimeout);
   }, []);
@@ -66,22 +70,29 @@ const HeroSection = () => {
         className="absolute inset-0 w-full h-full object-cover"
       />
 
-      <div className="absolute inset-0 bg-black/10"></div>
+      <div className="absolute inset-0 bg-black/30"></div>
 
       <div className="relative z-10 flex flex-col items-center justify-center h-full text-center px-4">
         <AnimatePresence>
           {showMainTitle && (
-            <motion.h1
+            <motion.div
               key="main-title"
-              className="text-yellow-400 text-3xl md:text-5xl font-extrabold mb-8 leading-snug"
               variants={mainTitleVariant}
               initial="hidden"
               animate="visible"
               exit="exit"
+              className="flex flex-col items-center"
             >
-              বাংলাদেশের উন্নততম বৃহত্তম শিক্ষা প্রতিষ্ঠানের পোশাক তৈরির
-              কারখানায় Foysal Garments আপনাকে স্বাগতম
-            </motion.h1>
+              <span className="px-5 py-1.5 rounded-full bg-yellow-400 text-gray-900 text-sm font-bold tracking-wide uppercase shadow-lg">
+                {t("hero.season")}
+              </span>
+              <h1 className="mt-5 text-white text-4xl md:text-6xl font-extrabold leading-snug drop-shadow-lg">
+                {t("hero.title")}
+              </h1>
+              <p className="mt-4 text-white/90 text-lg md:text-xl max-w-2xl drop-shadow">
+                {t("hero.subtitle")}
+              </p>
+            </motion.div>
           )}
         </AnimatePresence>
 
@@ -94,15 +105,33 @@ const HeroSection = () => {
               animate="visible"
               exit="exit"
             >
-              <h2 className="text-cyan-400 text-4xl md:text-6xl font-bold mb-4">
+              <span className="px-5 py-1.5 rounded-full bg-yellow-400 text-gray-900 text-sm font-bold tracking-wide uppercase shadow-lg">
+                {t("hero.season")}
+              </span>
+              <h2 className="text-[#FF6A1A] text-4xl md:text-6xl font-bold mb-4 mt-5 drop-shadow-lg">
                 {headings[currentIndex]}
               </h2>
-              <p className="text-white text-lg md:text-2xl max-w-2xl mx-auto">
+              <p className="text-white text-lg md:text-2xl max-w-2xl mx-auto drop-shadow">
                 {subTexts[currentIndex]}
               </p>
             </motion.div>
           </AnimatePresence>
         )}
+
+        <div className="mt-10 flex flex-col sm:flex-row gap-4">
+          <Link
+            to="/shop"
+            className="px-8 py-3.5 rounded-full bg-[#FF6A1A] text-white font-semibold hover:bg-[#e0580e] transition shadow-xl shadow-[#FF6A1A]/40"
+          >
+            {t("hero.cta")} →
+          </Link>
+          <Link
+            to="/shop"
+            className="px-8 py-3.5 rounded-full bg-white/15 backdrop-blur border border-white/50 text-white font-semibold hover:bg-white/25 transition"
+          >
+            {t("hero.exploreCategories")}
+          </Link>
+        </div>
       </div>
     </div>
   );

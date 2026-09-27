@@ -1,148 +1,108 @@
 import { createContext, useEffect, useState } from "react";
-import {
-    getAuth,
-    createUserWithEmailAndPassword,
-    signInWithEmailAndPassword,
-    GoogleAuthProvider,
-    signInWithPopup,
-    sendPasswordResetEmail,
-    signOut,
-    updateProfile,
-    onAuthStateChanged,
-    RecaptchaVerifier,
-    signInWithPhoneNumber
-} from "firebase/auth";
-import { app } from "../firebase/firebase.config";
-import useAxiosPublic from "../hooks/useAxiosPublic";
+import axios from "axios";
 
 export const authContext = createContext(null);
-
-const auth = getAuth(app);
 
 const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
-    const [confirmationResult, setConfirmationResult] = useState(null);
 
-    const googleProvider = new GoogleAuthProvider();
-    const axiosPublic = useAxiosPublic();
+    // Restore session on mount: /me, falling back to one refresh then retry.
+    useEffect(() => {
+        let cancelled = false;
 
-    //  Email Register
-    const createUser = (email, password) => {
-        setLoading(true);
-        return createUserWithEmailAndPassword(auth, email, password);
+        const restore = async () => {
+            try {
+                const res = await axios.get("/api/auth/me", { withCredentials: true });
+                if (!cancelled) setUser(res.data.user);
+            } catch (err) {
+                if (err.response?.status === 401) {
+                    try {
+                        await axios.post("/api/auth/refresh", null, { withCredentials: true });
+                        const res = await axios.get("/api/auth/me", { withCredentials: true });
+                        if (!cancelled) setUser(res.data.user);
+                    } catch {
+                        if (!cancelled) setUser(null);
+                    }
+                } else {
+                    if (!cancelled) setUser(null);
+                }
+            } finally {
+                if (!cancelled) setLoading(false);
+            }
+        };
+
+        restore();
+
+        const handleSessionExpired = () => setUser(null);
+        window.addEventListener("auth:session-expired", handleSessionExpired);
+
+        return () => {
+            cancelled = true;
+            window.removeEventListener("auth:session-expired", handleSessionExpired);
+        };
+    }, []);
+
+    //  Register (auto-login on success)
+    const createUser = async (name, email, password, photo = "", phone = "") => {
+        const res = await axios.post(
+            "/api/auth/register",
+            { name, email, password, photo, phone },
+            { withCredentials: true }
+        );
+        setUser(res.data.user);
+        return res.data.user;
     };
 
-    //  Email Login
-    const signIn = (email, password) => {
-        setLoading(true);
-        return signInWithEmailAndPassword(auth, email, password);
-    };
-
-    //  Google Login
-    const googleSignIn = () => {
-        setLoading(true);
-        return signInWithPopup(auth, googleProvider);
-    };
-
-    //  Reset Password
-    const resetPassword = (email) => {
-        setLoading(true);
-        return sendPasswordResetEmail(auth, email);
+    //  Login
+    const signIn = async (email, password) => {
+        const res = await axios.post(
+            "/api/auth/login",
+            { email, password },
+            { withCredentials: true }
+        );
+        setUser(res.data.user);
+        return res.data.user;
     };
 
     //  Logout
-    const logOut = () => {
-        setLoading(true);
-        return signOut(auth);
+    const logOut = async () => {
+        try {
+            await axios.post("/api/auth/logout", null, { withCredentials: true });
+        } finally {
+            setUser(null);
+        }
+    };
+
+    //  Forgot Password
+    const resetPassword = async (email) => {
+        const res = await axios.post(
+            "/api/auth/forgot-password",
+            { email },
+            { withCredentials: true }
+        );
+        return res.data;
     };
 
     //  Update Profile
-    const updateUserProfile = (name, photo) => {
-        return updateProfile(auth.currentUser, {
-            displayName: name,
-            photoURL: photo,
-        });
-    };
-
-    //  SEND OTP
-    const sendOtp = async (phone) => {
-        setLoading(true);
-
-        window.recaptchaVerifier = new RecaptchaVerifier(
-            "recaptcha-container",
-            { size: "invisible" },
-            auth
+    const updateUserProfile = async ({ name, photo }) => {
+        const res = await axios.patch(
+            "/api/users/me",
+            { name, photo },
+            { withCredentials: true }
         );
-
-        try {
-            const confirmation = await signInWithPhoneNumber(
-                auth,
-                phone,
-                window.recaptchaVerifier
-            );
-
-            setConfirmationResult(confirmation);
-            setLoading(false);
-
-            return true;
-        } catch (error) {
-            setLoading(false);
-            throw error;
-        }
+        setUser(res.data.user);
+        return res.data.user;
     };
-
-    //  VERIFY OTP (Login/Register same)
-    const verifyOtp = async (otp) => {
-        if (!confirmationResult) throw new Error("OTP not sent");
-
-        setLoading(true);
-        try {
-            const result = await confirmationResult.confirm(otp);
-            setLoading(false);
-            return result;
-        } catch (error) {
-            setLoading(false);
-            throw error;
-        }
-    };
-
-    //  Auth State
-    useEffect(() => {
-        const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-            setUser(currentUser);
-
-            if (currentUser) {
-                const userInfo = {
-                    email: currentUser.email || currentUser.phoneNumber
-                };
-
-                axiosPublic.post("/jwt", userInfo).then((res) => {
-                    if (res.data.token) {
-                        localStorage.setItem("access-token", res.data.token);
-                    }
-                    setLoading(false);
-                });
-            } else {
-                localStorage.removeItem("access-token");
-                setLoading(false);
-            }
-        });
-
-        return () => unsubscribe();
-    }, [axiosPublic]);
 
     const authInfo = {
         user,
         loading,
         createUser,
         signIn,
-        googleSignIn,
-        resetPassword,
         logOut,
+        resetPassword,
         updateUserProfile,
-        sendOtp,     
-        verifyOtp    
     };
 
     return (

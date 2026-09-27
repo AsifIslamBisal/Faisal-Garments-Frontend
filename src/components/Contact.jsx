@@ -69,7 +69,7 @@ const Contact = () => {
   };
 
   return (
-    <div className="min-h-screen bg-white py-16 px-4 sm:px-6 lg:px-8 mt-8 font-sans">
+    <div className="min-h-screen bg-[#FFFFFB] py-16 px-4 sm:px-6 lg:px-8 mt-8 font-sans">
       <div className="max-w-7xl mx-auto">
         
         <motion.div 
@@ -81,10 +81,10 @@ const Contact = () => {
           <h1 className="text-4xl md:text-6xl font-black text-slate-900 mb-4">
             Foysal Garments
           </h1>
-          <p className="text-lg md:text-xl text-blue-600 font-semibold">
+          <p className="text-lg md:text-xl text-[#FF6A1A] font-semibold">
             বাংলাদেশের উন্নততম ও বৃহত্তম শিক্ষা প্রতিষ্ঠানের পোশাক তৈরির কারখানা
           </p>
-          <div className="mt-6 w-32 h-1.5 bg-blue-600 mx-auto rounded-full"></div>
+          <div className="mt-6 w-32 h-1.5 bg-[#FF6A1A] mx-auto rounded-full"></div>
         </motion.div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-stretch">
@@ -104,7 +104,7 @@ const Contact = () => {
               
               <div className="space-y-8">
                 <div className="flex items-center space-x-5">
-                  <div className="flex-shrink-0 w-12 h-12 bg-blue-50 flex items-center justify-center rounded-2xl text-blue-600 shadow-sm">
+                  <div className="flex-shrink-0 w-12 h-12 bg-[#FFE9DB] flex items-center justify-center rounded-2xl text-[#FF6A1A] shadow-sm">
                     <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                     </svg>
@@ -116,7 +116,7 @@ const Contact = () => {
                 </div>
 
                 <div className="flex items-center space-x-5">
-                  <div className="flex-shrink-0 w-12 h-12 bg-blue-50 flex items-center justify-center rounded-2xl text-blue-600 shadow-sm">
+                  <div className="flex-shrink-0 w-12 h-12 bg-[#FFE9DB] flex items-center justify-center rounded-2xl text-[#FF6A1A] shadow-sm">
                     <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
                     </svg>
@@ -127,7 +127,7 @@ const Contact = () => {
                   </div>
                 </div>
                 <div className="flex items-center space-x-5">
-                  <div className="flex-shrink-0 w-12 h-12 bg-blue-50 flex items-center justify-center rounded-2xl text-blue-600 shadow-sm">
+                  <div className="flex-shrink-0 w-12 h-12 bg-[#FFE9DB] flex items-center justify-center rounded-2xl text-[#FF6A1A] shadow-sm">
                     <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                     </svg>
@@ -164,7 +164,7 @@ const Contact = () => {
                       name="name"
                       value={formData.name}
                       onChange={handleChange}
-                      className={`w-full px-5 py-4 bg-slate-50 rounded-xl border-2 transition duration-300 outline-none placeholder-slate-400 ${errors.name ? 'border-red-300' : 'border-transparent focus:border-blue-500'}`} 
+                      className={`w-full px-5 py-4 bg-slate-50 rounded-xl border-2 transition duration-300 outline-none placeholder-slate-400 ${errors.name ? 'border-red-300' : 'border-transparent focus:border-[#FF6A1A]'}`} 
                       placeholder="Your Name"
                     />
                     {errors.name && <span className="text-red-500 text-[10px] ml-1 font-bold">{errors.name}</span>}
@@ -176,7 +176,7 @@ const Contact = () => {
                       name="email"
                       value={formData.email}
                       onChange={handleChange}
-                      className={`w-full px-5 py-4 bg-slate-50 rounded-xl border-2 transition duration-300 outline-none placeholder-slate-400 ${errors.email ? 'border-red-300' : 'border-transparent focus:border-blue-500'}`} 
+                      className={`w-full px-5 py-4 bg-slate-50 rounded-xl border-2 transition duration-300 outline-none placeholder-slate-400 ${errors.email ? 'border-red-300' : 'border-transparent focus:border-[#FF6A1A]'}`} 
                       placeholder="Enter a Valid email"
                     />
                     {errors.email && <span className="text-red-500 text-[10px] ml-1 font-bold">{errors.email}</span>}
@@ -190,7 +190,7 @@ const Contact = () => {
                     name="school_name"
                     value={formData.school_name}
                     onChange={handleChange}
-                    className={`w-full px-5 py-4 bg-slate-50 rounded-xl border-2 transition duration-300 outline-none placeholder-slate-400 ${errors.school_name ? 'border-red-300' : 'border-transparent focus:border-blue-500'}`} 
+                    className={`w-full px-5 py-4 bg-slate-50 rounded-xl border-2 transition duration-300 outline-none placeholder-slate-400 ${errors.school_name ? 'border-red-300' : 'border-transparent focus:border-[#FF6A1A]'}`} 
                     placeholder="Enter school or college name"
                   />
                   {errors.school_name && <span className="text-red-500 text-[10px] ml-1 font-bold">{errors.school_name}</span>}
@@ -203,7 +203,7 @@ const Contact = () => {
                     value={formData.message}
                     onChange={handleChange}
                     rows="5" 
-                    className="w-full px-5 py-4 bg-slate-50 rounded-xl border-2 border-transparent focus:border-blue-500 transition duration-300 outline-none placeholder-slate-400 resize-none" 
+                    className="w-full px-5 py-4 bg-slate-50 rounded-xl border-2 border-transparent focus:border-[#FF6A1A] transition duration-300 outline-none placeholder-slate-400 resize-none" 
                     placeholder="How can we help your institution?"
                   ></textarea>
                 </div>
@@ -213,7 +213,7 @@ const Contact = () => {
                   whileHover={status !== 'sending' ? { y: -3, shadow: "0 10px 15px -3px rgba(37, 99, 235, 0.4)" } : {}}
                   whileTap={status !== 'sending' ? { scale: 0.98 } : {}}
                   type="submit" 
-                  className={`w-full font-bold py-5 rounded-xl shadow-lg transition duration-300 flex items-center justify-center space-x-2 group ${status === 'sending' ? 'bg-gray-400 cursor-not-allowed' : 'bg-blue-600 hover:bg-blue-700 text-white'}`}
+                  className={`w-full font-bold py-5 rounded-xl shadow-lg transition duration-300 flex items-center justify-center space-x-2 group ${status === 'sending' ? 'bg-gray-400 cursor-not-allowed' : 'bg-[#FF6A1A] hover:bg-[#e0580e] text-white'}`}
                 >
                   <span>{status === 'sending' ? 'Sending...' : 'Send Messages'}</span>
                   {status !== 'sending' && (
